@@ -1,13 +1,25 @@
 var time = moment().format('LLLL')
 
-var standardTime = moment().format('h')
-var militaryTime = moment().format('k')
 
 //set date and time at top of web page
 const currentDate = $('#currentDay')
 currentDate.text(time)
 
-//save tasks for each hour into local storage
+var currentHour = moment().get("hour")
+console.log(currentHour)
+
+//loop through each hour and apply past present or future class
+for (i = 9; i <=17; i++){
+if (i < currentHour){
+    document.getElementById(i.toString()).classList.add('past')
+}else if (i === currentHour) {
+    document.getElementById(i.toString()).classList.add('present')
+}else if (i > currentHour) {
+     document.getElementById(i.toString()).classList.add('future')
+ }
+}
+
+//save tasks for each hour into local storage on button click
 $(".container").on("click", "button", function() {
   
 var hr9 = document.getElementById('9').value;
@@ -31,6 +43,7 @@ localStorage.setItem('task17', hr17);
 
 })
 
+
 //get each saved task from local storage
 var saved9 = localStorage.getItem('task9')
 document.getElementById('9').value = saved9
@@ -51,31 +64,3 @@ document.getElementById('16').value = saved16
 var saved17 = localStorage.getItem('task17')
 document.getElementById('17').value = saved17
      
-
-
-
-
-
-
-
-
-
-
-
-
-// var saveTasks = function() {
-//     localStorage.setItem("tasks", JSON.stringify(tasks));
-//   };
-  
-// {
-//     //console.log($(this)) WORKS
-    
-//     //targets "textarea" for event listener
-//     var text = $("textarea")
-//     .val()
-//     .trim()
-//     //console.log(text) WORKS
-  
-//   })
-
-// saveTasks()
